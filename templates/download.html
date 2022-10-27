@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1>{{url.title}}</h1>
+    <form method="POST" action="{{ url_for('download_video') }}">
+        <select name="itag">
+            {% for i in url.streams.filter(progressive=True) %}
+                <div width="100%">
+                    <option style="text-align: center;" value="{{ i.itag }}"> {{ i.resolution}} </option>
+                </div>
+            {% endfor %}
+        </select>
+        <button type="submit">Download</button>
+    </form>
+    <form method="POST" action="{{ url_for('download_music') }}">
+        <button type="submit">Mp3</button>
+    </form>
+
+{% endblock content %}
